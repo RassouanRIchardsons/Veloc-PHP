@@ -1,3 +1,47 @@
+<?php
+    require 'connect.php';
+    $db = connect("veloc");
+
+
+
+// VERIFICATIONS
+    if(isset($_GET["idarticles"])){
+        $idarticles = trim(htmlspecialchars($_GET["idarticles"]));
+    }else{
+        $idarticles = null;
+    }
+    if(isset($_POST["nom_article"])){
+        $nom_article = trim(htmlspecialchars($_POST["nom_article"]));
+    }else{
+        $nom_article = null;
+    }
+    if(isset($_POST["description_article"])){
+        $description_article = trim(htmlspecialchars($_POST["description_article"]));
+    }else{
+        $description_article = null;
+    }
+    if(isset($_POST["type_article"])){
+        $type_article = trim(htmlspecialchars($_POST["type_article"]));
+    }else{
+        $type_article = null;
+    }
+    if(isset($_POST["taux_tva"])){
+        $taux_tva = trim(htmlspecialchars($_POST["taux_tva"]));
+    }else{
+        $taux_tva = null;
+    }
+    if(isset($_POST["prix_article_HT"])){
+        $prix_article_HT = trim(htmlspecialchars($_POST["prix_article_HT"]));
+    }else{
+        $prix_article_HT = null;
+    }
+// FIN VERIFICATIONS
+?>
+
+
+
+
+
 <!doctype html>
     <html lang="fr">
         <head>
@@ -57,93 +101,137 @@
                             </a>
                         </h1>
                         <br>
+
+
+
+
+
+
+
+<!-- AFFICHAGE TABLEAU PRODUITS -->
+<?php
+    try{
+        $req = $db->prepare("SELECT * FROM articles ");
+        $req-> bindParam(":idarticles", $idarticles, PDO::PARAM_INT);
+        $req-> bindParam(":nom_article", $nom_article, PDO::PARAM_STR);
+        $req-> bindParam(":description_article", $description_article, PDO::PARAM_STR);
+        $req-> bindParam(":type_article", $type_article, PDO::PARAM_INT);
+        $req-> bindParam(":taux_tva", $taux_tva, PDO::PARAM_INT);
+        $req-> bindParam(":prix_article_HT", $prix_article_HT, PDO::PARAM_INT);
+        $req->execute();
+// LE CODE CI DESSUS PERMET DE "CHARGER" OU DE "PREPARER" CE QUE L'ON CHERCHE A AFFICHER
+?>
                         <table class="container table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Référence</th>
-                                    <th scope="col">Quantité</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Prix</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Fonctionnement</th>
+                                    <th scope="col">Nom du vélo</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Taux TVA</th>
+                                    <th scope="col">Prix HT</th>
                                     <th scope="col">Gestion</th>
                                 </tr>
                             </thead>
                             <tbody>
+<?php
+        while($data = $req->fetchObject()){
+            if($data->type_article == 0){
+                $data->type_article = "Mécanique";
+            }elseif($data->type_article == 1){
+                $data->type_article = "Électrique";
+            }else{
+                $data->type_article = "Inconnu";
+            }
+?>
                                 <tr>
-                                    <th scope="row">Méca</th>
-                                    <td>#A001</td>
-                                    <td>1</td>
-                                    <td>Mécanique</td>
-                                    <td>10€</td>
+                                    <th scope="row"><?php echo $data->idarticles; ?></th>
+                                    <td><?php echo $data->type_article; ?></td>
+                                    <td><?php echo $data->nom_article; ?></td>
+                                    <td><?php echo $data->description_article; ?></td>
+                                    <td><?php echo $data->taux_tva; ?></td>
+                                    <td><?php echo $data->prix_article_HT; ?> €</td>
                                     <td>
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownGestion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownGestion">
+                                            <a class="dropdown-item" href="modifArticles.php?idarticles=<?php echo $data->idarticles; ?>">Modifier</a>
+                                            <a class="dropdown-item" href="supprimerArticles.php?idarticles=<?php echo $data->idarticles; ?>">Supprimer</a>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">Elec</th>
-                                    <td>#B001</td>
-                                    <td>1</td>
-                                    <td>Electrique</td>
-                                    <td>10€</td>
-                                    <td>
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                        </div>
-                                    </td>
-                                </tr>
+<?php
+        }
+    }catch (Exception $e){
+        echo $e->getMessage();
+    }
+?>
+<!-- FIN AFFICHAGE TABLEAU PRODUIT -->
+
+
+<!-- FORMULAIRE D'AJOUT D'ARTICLE -->
                             </tbody>
                         </table>
                         <br><br><br>
                         <div class="container">
-                            <h2 class=""><u><span class="righteous">Ajouter un article :</span></u></h2>
+                            <h2 class=""><u><span class="righteous">Ajouter un article</u> :</span></h2>
                             <form method="POST" action="recueil.php">
                                 <div class="form-group">
-                                    <label for="nom_article"><u> Référence article</u> :</label>
+                                    <label for="nom_article"> Référence article :</label>
                                     <input type="text" class="form-control" id="nom_article" aria-describedby="ref" name="nom_article" placeholder="Ex : #A001">
                                 </div>
                                 <div class="form-group">
-                                    <label for="description_article"><u> Description de l'article</u> :</label>
+                                    <label for="description_article"> Description de l'article :</label>
                                     <input type="text" class="form-control" id="description_article" aria-describedby="ref" name="description_article" placeholder="Ex : blablabla">
                                 </div>
                                 <div class="form-group">
-                                    <label for="prix_article_HT"><u> Prix</u> :</label>
+                                    <label for="prix_article_HT"> Prix :</label>
                                     <input type="number" class="form-control" id="prix_article_HT" aria-describedby="ref" name="prix_article_HT" placeholder="Ex : 10">
                                 </div>
                                 <div class="form-group">
-                                    <label for="taux_tva"><u> Taux TVA</u> :</label>
-                                    <input type="number" class="form-control" id="taux_tva" aria-describedby="ref" name="taux_tva" placeholder="Ex : 10">
-                                </div>
-                                
-
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Êtes-vous sur ?</label>
+                                    <label for="taux_tva"> Taux de TVA :</label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="taux_tva" id="taux_tva1" value="5" checked>
+                                        <label class="form-check-label" for="taux_tva1">5 %</label>
                                     </div>
-                                <button type="submit" class="btn btn-primary">Ajouter</button>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="taux_tva" id="taux_tva2" value="10">
+                                        <label class="form-check-label" for="taux_tva2">10 %</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="type_article"> Type de vélo :</label><br>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="type_article" id="type_article1" value="0" checked>
+                                        <label class="form-check-label" for="type_article1">Mécanique</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="type_article" id="type_article2" value="1">
+                                        <label class="form-check-label" for="type_article2">Électrique</label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Ajouter le produit</button>
                             </form>
                         </div>
+<!-- FIN DE FORMULAIRE D'AJOUT D'ARTICLE -->
+
+
+
                         <br><br><br>
                         <div class="container">
-                            <h2 class=""><u><span class="righteous">Afficher prix selon réference :</span></u></h2>
+                            <h2 class=""><u><span class="righteous">Afficher prix selon réference</u> :</span></h2>
                             <form method="POST" action="showArticle.php">
                                 <div class="form-group">
-                                    <label for="nom_article"><u> Référence article</u> :</label>
+                                    <label for="nom_article"> Référence article :</label>
                                     <input type="text" class="form-control" id="nom_article" aria-describedby="ref" name="nom_article" placeholder="Ex : #A001">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Ajouter</button>
                             </form>
                         </div>
                         <div class="container">
-                        <h2 class=""><u><span class="righteous">Mise à jour du stock selon ville :</span></u></h2>
+                        <h2 class=""><u><span class="righteous">Mise à jour du stock selon ville</u> :</span></h2>
                         <form method="POST" action="showArticle.php">
                             <div class="form-group">
-                                <label for="nom_ville"><u> Ville</u> :</label>
+                                <label for="nom_ville"> Ville :</label>
                                 <input type="radio" id="nom_ville" aria-describedby="ref" name="nom_ville" value="Paris">
                             </div>
                             <button type="submit" class="btn btn-primary">Ajouter</button>

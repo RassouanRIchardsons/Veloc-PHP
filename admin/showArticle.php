@@ -3,7 +3,7 @@
     require 'connect.php';
 
     // créer la variable connection 
-    $db = connect();
+    $db = connect("veloc");
     // TABLE ARTICLES 
     if(isset($_POST["nom_article"])){
         $nom_article = trim(htmlspecialchars($_POST["nom_article"]));
