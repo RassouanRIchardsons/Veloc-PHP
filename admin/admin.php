@@ -154,11 +154,30 @@
                                     <td>
                                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownGestion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownGestion">
-                                            <a class="dropdown-item" href="modifArticles.php?idarticles=<?php echo $data->idarticles; ?>">Modifier</a>
-                                            <a class="dropdown-item" href="supprimerArticles.php?idarticles=<?php echo $data->idarticles; ?>">Supprimer</a>
+                                            <a href="modifArticles.php?idarticles=<?php echo $data->idarticles; ?>"><button class="btn btn-danger dropdown-item" type="submit">Modifier</button></a>
+                                            <button class="btn btn-danger dropdown-item" data-toggle="modal" data-id="<?php echo $data->idarticles; ?>" data-target="#exampleModalCenter<?php echo $data->idarticles;  ?>" type="button">Supprimer</button>
                                         </div>
                                     </td>
                                 </tr>
+<!-- MODAL CONFIRMATION SUUPPRESSION -->
+        <div class="modal fade" id="exampleModalCenter<?php echo $data->idarticles; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Confirmer la suppression ?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="supprimerArticles.php?idarticles=<?php echo $idarticles; ?>"><button type="button" class="btn btn-primary"> Confirmer</button></a>
+                        
+                    </div>        
+                </div>
+            </div>
+        </div>
+<!-- // MODAL CONFIRMATION SUUPPRESSION -->
 <?php
         }
     }catch (Exception $e){
@@ -209,7 +228,7 @@
                                         <label class="form-check-label" for="type_article2">Électrique</label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Ajouter le produit</button>
+                                <button name="submitAjoutArticle" type="submit" class="btn btn-primary">Ajouter le produit</button>
                             </form>
                         </div>
 <!-- FIN DE FORMULAIRE D'AJOUT D'ARTICLE -->
