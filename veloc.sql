@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 11 sep. 2019 à 14:28
+-- Généré le :  jeu. 19 sep. 2019 à 14:28
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -53,17 +53,16 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `description_article` varchar(45) NOT NULL,
   `prix_article_HT` int(11) NOT NULL,
   `taux_tva` int(11) NOT NULL,
+  `type_article` tinyint(1) NOT NULL COMMENT '0 = meca; 1=elec',
   PRIMARY KEY (`idarticles`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `articles`
 --
 
-INSERT INTO `articles` (`idarticles`, `nom_article`, `description_article`, `prix_article_HT`, `taux_tva`) VALUES
-(1, '10', '10', 22, 4),
-(2, 'Vélo 2', 'blabla à propos du vélo 2', 45, 20),
-(3, 'Vélo3', 'blabla à propos du vélo3', 93, 25);
+INSERT INTO `articles` (`idarticles`, `nom_article`, `description_article`, `prix_article_HT`, `taux_tva`, `type_article`) VALUES
+(9, 'Vélo2', 'Vélo elec', 3, 5, 1);
 
 -- --------------------------------------------------------
 
