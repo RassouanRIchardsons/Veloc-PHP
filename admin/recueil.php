@@ -61,9 +61,19 @@
         }
     }
 
+
+
+
+
+
     // RECUEIL AJOUT UTILISATEUR
-    if(isset($_POST['submitAjoutUtilisateur']))
+    if(isset($_POST['submitAjoutUtilisateur'])){
         // TABLE ARTICLES 
+        if(isset($_POST["sexe_utilisateur"])){
+            $sexe_utilisateur = trim(htmlspecialchars($_POST["sexe_utilisateur"]));
+        }else{
+            $sexe_utilisateur = null;
+        }
         if(isset($_POST["nom_utilisateur"])){
             $nom_utilisateur = trim(htmlspecialchars($_POST["nom_utilisateur"]));
         }else{
@@ -79,10 +89,10 @@
         }else{
             $adresse_mail_utilisateur = null;
         }
-        if(isset($_POST["date_naissance_utlilisateur"])){
-            $date_naissance_utlilisateur = trim(htmlspecialchars($_POST["date_naissance_utlilisateur"]));
+        if(isset($_POST["date_naissance_utilisateur"])){
+            $date_naissance_utilisateur = trim(htmlspecialchars($_POST["date_naissance_utilisateur"]));
         }else{
-            $date_naissance_utlilisateur = null;
+            $date_naissance_utilisateur = null;
         }
         if(isset($_POST["password_utilisateur"]) AND isset($_POST["password_utilisateur2"])){
             if($_POST["password_utilisateur"] = $_POST["password_utilisateur2"]){
@@ -94,22 +104,23 @@
 
         try{
             // TABLE USER
-                $req = $db->prepare(" INSERT INTO articles (nom_article, description_article, prix_article_HT, taux_tva, type_article) VALUES (:nom_article, :description_article, :prix_article_HT, :taux_tva, :type_article) ");
-                $req-> bindParam(":type_article", $type_article, PDO::PARAM_STR);
-                $req-> bindParam(":nom_article", $nom_article, PDO::PARAM_STR);
-                $req-> bindParam(":description_article", $description_article, PDO::PARAM_STR);
-                $req-> bindParam(":prix_article_HT", $prix_article_HT, PDO::PARAM_INT);
-                $req-> bindParam(":taux_tva", $taux_tva, PDO::PARAM_INT);
-            // // TABLE USER
-    
-    
-    
-    
-                $req-> execute();
-    
-                header('Location: confirm.php');
+                $req = $db->prepare(" INSERT INTO utilisateurs (sexe_utilisateur, nom_utilisateur, prenom_utilisateur, date_naissance_utilisateur, adresse_mail_utilisateur, password_utilisateur, date_creation_utilisateurs) VALUES (:sexe_utilisateur, :nom_utilisateur, :prenom_utilisateur, :date_naissance_utilisateur, :adresse_mail_utilisateur, :password_utilisateur, NOW() ) ");
+                $req-> bindParam(":sexe_utilisateur", $sexe_utilisateur, PDO::PARAM_STR);
+                $req-> bindParam(":nom_utilisateur", $nom_utilisateur, PDO::PARAM_STR);
+                $req-> bindParam(":prenom_utilisateur", $prenom_utilisateur, PDO::PARAM_STR);
+                $req-> bindParam(":date_naissance_utilisateur", $date_naissance_utilisateur, PDO::PARAM_STR);
+                $req-> bindParam(":adresse_mail_utilisateur", $adresse_mail_utilisateur, PDO::PARAM_STR);
+                $req-> bindParam(":password_utilisateur", $password_utilisateur, PDO::PARAM_STR);
                 
-            }catch (Exception $e){
-                echo $e->getMessage();
-            }
+            // // TABLE USER
+                $req-> execute();
+                // header('formulaire_supplementaire.php');
+                echo 'cool';
+                // A EFFECTUER : CREER UNE PAGE PHP COMPRENNANT UN FOMULAIRE QUI AIDERA A REMPLIR LE RESTE DES INFORMATIONS CONCERANT L'UTILISATEUR.
+
+
+        }catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
 ?>

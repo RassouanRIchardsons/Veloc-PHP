@@ -439,6 +439,16 @@ session_start();
                                             <span class="bg-light">OU</span>
                                         </p>
                                         <form method="POST" action="admin/recueil.php">
+                                        <!-- SEXE -->
+                                            <div class="form-group input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fas fa-male" aria-hidden="true"></i> </span>
+                                                </div>
+                                                <select name="sexe_utilisateur" class="form-control">
+                                                    <option value="m">Homme</option>
+                                                    <option value="f">Femme</option>    
+                                                </select>
+                                            </div>
                                             <!-- NOM -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
@@ -465,7 +475,7 @@ session_start();
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fas fa-birthday-cake"></i> </span>
                                                 </div>
-                                                <input name="date_naissance_utlilisateur" class="form-control" placeholder="Date de naissance" value="Date de naissance" type="date">
+                                                <input name="date_naissance_utilisateur" class="form-control" placeholder="Date de naissance" value="Date de naissance" type="date">
                                             </div>
                                             <!-- PASSWORD -->
                                             <div class="form-group input-group">
