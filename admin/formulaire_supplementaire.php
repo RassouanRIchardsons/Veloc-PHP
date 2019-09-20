@@ -17,7 +17,7 @@ session_start();
             <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <!-- Lien CSS -->
-            <link rel="stylesheet" href="assets/style.css"/>
+            <link rel="stylesheet" href="../assets/style.css"/>
             <title>Véloc, location de vélo en 2"2'</title>
         </head>
 
@@ -72,57 +72,82 @@ session_start();
                                     <article class="card-body mx-auto" style="max-width: 500px;">
                                         <h4 class="card-title mt-3 text-center righteous"><i class="fas fa-biking fa-2x mr-1" aria-hidden="true"></i>Information supplémentaires</h4>
                                         <br>
-                                        <form method="POST" action="admin/recueil.php">
-                                            <!-- Ville -->
+                                        <form method="POST" action="recueil.php">
+                                        
+                                        <!-- ADRESSE -->
+                                        <h5 class="card-title mt-3 text-center righteous"><i class="fas fa-biking fa-2x mr-1" aria-hidden="true"></i>Adresse</h5>
+                                            <!-- villes_habitations -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-id-card-o" aria-hidden="true"></i> </span>
                                                 </div>
-                                                <input name="ville_adresses_utilisateurs" class="form-control" placeholder="Villes" type="text">
+                                                <input name="villes_habitations" class="form-control" placeholder="Ville *" type="text">
                                             </div>
-                                            <!-- Numéro habitation -->
+                                            <!-- numero_habitations -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-id-card" aria-hidden="true"></i></span>
                                                 </div>
-                                                <input name="numero_habitations" class="form-control" placeholder="Numéro d'habitation" pattern="[0-9]" type="text">
+                                                <input name="numero_habitations" class="form-control" placeholder="Numéro d'habitation *" pattern="[0-9]{0,4}" type="text">
                                             </div>
-                                            <!-- Rue habitation -->
+                                            <!-- extension_habitations  -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                                 </div>
-                                                <input name="rue_habitations" class="form-control" placeholder="Rue d'habitation" type="text">
-                                            </div> 
-                                            <!-- Extension si il y a  -->
-                                            <div class="form-group input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fas fa-birthday-cake"></i> </span>
-                                                </div>
-                                                <input name="date_naissance_utilisateur" class="form-control" placeholder="Date de naissance" value="Date de naissance" type="date">
+                                                <input name="extension_habitations" class="form-control" placeholder="Extension" type="text">
                                             </div>
-                                            <!-- PASSWORD -->
+
+                                            <!-- rue_habitations -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                                    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                                 </div>
-                                                <input name="password_utilisateur" class="form-control" placeholder="Mot de passe" type="password">
+                                                <input name="rue_habitations" class="form-control" placeholder="Rue *" type="text">
                                             </div> 
-                                            <!-- REPETER PASSWORD -->
+
+                                            <!-- type_utilisateur -->
+                                            <div class="form-group input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fas fa-male" aria-hidden="true"></i> </span>
+                                                </div>
+                                                <select name="type_utilisateur" class="form-control">
+                                                    <option value="part">Particulier</option>
+                                                    <option value="pro">Professionel</option>    
+                                                </select>
+                                            </div>
+                                            
+                                            <br>
+                                        <!-- CARTE BLEUE -->
+                                            <h5 class="card-title mt-3 text-center righteous"><i class="fas fa-biking fa-2x mr-1" aria-hidden="true"></i>CARTE BANCAIRE</h5>
+                                            <!-- CB_number -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                                 </div>
-                                                <input name="password_utilisateur2" class="form-control" placeholder="Répeter votre mot de passe" type="password">
+                                                <input name="CB_number" class="form-control" placeholder="Numéro de CB *" type="text" pattern="[0-9]">
+                                            </div> 
+                                            <!-- CB_name -->
+                                            <div class="form-group input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                                </div>
+                                                <input name="CB_name" class="form-control" placeholder="Nom du titulaire de la carte *" type="text">
+                                            </div>
+                                            <!-- CB_validdate -->
+                                            <div class="form-group input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                                </div>
+                                                <input name="CB_validdate" class="form-control" placeholder="Date de valitidé de la carte" type="date">
                                             </div>
                                             <!-- SUBMIT -->
                                             <div class="form-group">
-                                                <button name="submitAjoutUtilisateur" type="submit" class="btn btn-primary btn-block">Créer son compte</button>
-                                            </div>       
-                                            <p class="text-center">Déjà membre? <a href="" data-toggle="modal" data-target="#modalSignIn" data-dismiss="modal">Log In</a> </p>                                                                 
+                                                <button name="submitFormulaireSupplementaire" type="submit" class="btn btn-primary btn-block">Créer son compte</button>
+                                            </div>                                    
                                         </form>
                                     </article>
-                                </div> <!-- card.// -->
+                                </div> 
                             
                             
                         </div>

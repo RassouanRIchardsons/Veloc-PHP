@@ -54,7 +54,7 @@
 
             $req-> execute();
 
-            header('Location: confirm.php');
+            // header('Location: confirm.php');
             
         }catch (Exception $e){
             echo $e->getMessage();
@@ -119,6 +119,87 @@
                 // A EFFECTUER : CREER UNE PAGE PHP COMPRENNANT UN FOMULAIRE QUI AIDERA A REMPLIR LE RESTE DES INFORMATIONS CONCERANT L'UTILISATEUR.
 
 
+        }catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
+
+
+    //RECUEIL FORMULAIRE SUPPLEMENTAIRE UTILISATEURS 
+    if(isset($_POST['submitFormulaireSupplementaire'])){
+        // TABLE ARTICLES 
+        if(isset($_POST["villes_habitations"])){
+            $villes_habitations = trim(htmlspecialchars($_POST["villes_habitations"]));
+        }else{
+            $villes_habitations = null;
+        }
+        if(isset($_POST["numero_habitations"])){
+            $numero_habitations = trim(htmlspecialchars($_POST["numero_habitations"]));
+        }else{
+            $numero_habitations = null;
+        }
+        if(isset($_POST["extension_habitations"])){
+            $extension_habitations = trim(htmlspecialchars($_POST["extension_habitations"]));
+        }else{
+            $extension_habitations = null;
+        }
+        if(isset($_POST["rue_habitations"])){
+            $rue_habitations = trim(htmlspecialchars($_POST["rue_habitations"]));
+        }else{
+            $rue_habitations = null;
+        }
+        if(isset($_POST["type_utilisateur"])){
+            $type_utilisateur = trim(htmlspecialchars($_POST["type_utilisateur"]));
+        }else{
+            $type_utilisateur = null;
+        }
+        if(isset($_POST["CB_number"])){
+            $CB_number = trim(htmlspecialchars($_POST["CB_number"]));
+        }else{
+            $CB_number = null;
+        }
+        if(isset($_POST["CB_name"])){
+            $CB_name = trim(htmlspecialchars($_POST["CB_name"]));
+        }else{
+            $CB_name = null;
+        }
+        if(isset($_POST["CB_validdate"])){
+            $CB_validdate = trim(htmlspecialchars($_POST["CB_validdate"]));
+        }else{
+            $CB_validdate = null;
+        }
+
+        try{
+            // TABLE USER
+
+                //ajout table adresse
+                $req = $db->prepare("INSERT INTO adresses_utilisateurs (villes_habitations, extension_habitations, numero_habitations, rue_habitations) VALUES (:villes_habitations, :extension_habitations, :numero_habitations, :rue_habitations) ");
+
+                //ajour table CB
+                $req = $db->prepare("INSERT INTO cb (CB_number, CB_name, CB_validdate) VALUES (:CB_number, :CB_name, :CB_validdate) ");
+
+                //ajout table utilisateur
+                $req = $db->prepare("INSERT INTO utilisateurs (type_utilisateur) VALUES (:type_utilisateur) ");
+                
+                $req-> bindParam(":villes_habitations", $villes_habitations, PDO::PARAM_STR);
+                $req-> bindParam(":extension_habitations", $extension_habitations, PDO::PARAM_STR);
+                $req-> bindParam(":numero_habitations", $numero_habitations, PDO::PARAM_STR);
+                $req-> bindParam(":rue_habitations", $rue_habitations, PDO::PARAM_STR);
+                $req-> bindParam(":type_utilisateur", $type_utilisateur, PDO::PARAM_STR);
+                $req-> bindParam(":CB_number", $CB_number, PDO::PARAM_INT);
+                $req-> bindParam(":CB_name", $CB_name, PDO::PARAM_STR);
+                $req-> bindParam(":CB_validdate", $CB_validdate, PDO::PARAM_STR);
+
+                $req-> execute();
+
+                var_dump($villes_habitations);
+                var_dump($numero_habitations);
+                var_dump($extension_habitations);
+                var_dump($rue_habitations);
+                var_dump($type_utilisateur);
+                var_dump($CB_number);
+                var_dump($CB_name);
+                var_dump($CB_validdate);
         }catch (Exception $e){
             echo $e->getMessage();
         }

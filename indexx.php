@@ -439,7 +439,7 @@ session_start();
                                             <span class="bg-light">OU</span>
                                         </p>
                                         <form method="POST" action="admin/recueil.php">
-                                        <!-- SEXE -->
+                                            <!-- SEXE -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fas fa-male" aria-hidden="true"></i> </span>
