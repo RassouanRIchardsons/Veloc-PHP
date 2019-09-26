@@ -135,7 +135,7 @@ echo $indexLille;
                             if(isset($_POST["type_utilisateur"])){
                                 $type_utilisateur = trim(htmlspecialchars($_POST["type_utilisateur"]));
                                 if(isset($_POST["CB_number"])){
-                                    $CB_number = strval(trim(htmlspecialchars($_POST["CB_number"])));
+                                    $CB_number = intval(trim(htmlspecialchars($_POST["CB_number"])));
                                     if(isset($_POST["CB_name"])){
                                         $CB_name = trim(htmlspecialchars($_POST["CB_name"]));
                                         if(isset($_POST["CB_validate"])){
@@ -194,7 +194,7 @@ echo $indexLille;
                 $req2-> bindParam(":code_postal_habitations", $code_postal_habitations, PDO::PARAM_STR);
                 $req2-> bindParam(":rue_habitations", $rue_habitations, PDO::PARAM_STR);
                 $req2-> bindParam(":type_utilisateur", $type_utilisateur, PDO::PARAM_STR);
-                $req2-> bindParam(":CB_number", $CB_number, PDO::PARAM_STR);
+                $req2-> bindParam(":CB_number", $CB_number, PDO::PARAM_INT);
                 $req2-> bindParam(":CB_name", $CB_name, PDO::PARAM_STR);
                 $req2-> bindParam(":CB_validate", $CB_validate, PDO::PARAM_STR);
                 

@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 ?>
 <!doctype html>
     <html lang="fr">
@@ -36,29 +36,29 @@ session_start();
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
+                        <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Page d'accueil</a>
+                                    <a class="nav-link righteous" href="#contenu_principal">Page d'accueil</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#ville">Trouvez sa borne</a>
+                                    <a class="nav-link righteous" href="#ville">Trouvez sa borne</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#caracteristiques">Nos vélos</a>
+                                    <a class="nav-link righteous" href="#caracteristiques">Nos vélos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#footer">Contact et Info</a>
+                                    <a class="nav-link righteous" href="#footer">Contact et Info</a>
                                 </li>
                             </ul>
                         </div>
-                        <a href="" data-toggle="modal" data-target="#modalReserver">PayPal</a>
+                        <?php if(isset($_SESSION['nom_utilisateur'])){
+                                echo "<p class ='pt-3 pr-4'><b>Inscription </b></p>";
+                                }else{
+                                    echo "<a href='' class='' data-toggle='modal' data-target='#modalSignIn'>S'identifier </a>";
+                                }
+                            ?>
+                        
                     </nav>
-
-                    <div class="col-12 d-flex justify-content-end">
-                        <a href="" class="pr-1" data-toggle="modal" data-target="#modalSignIn">S'identifier </a>
-                        /
-                        <a href="" class="pl-1" data-toggle="modal" data-target="#modalSignUp">  Créer un compte</a>
-                    </div>
                 </header>
 <!-- // HEADER -->
 
@@ -72,7 +72,7 @@ session_start();
                                     <article class="card-body mx-auto" style="max-width: 500px;">
                                         <h4 class="card-title mt-3 text-center righteous"><i class="fas fa-biking fa-2x mr-1" aria-hidden="true"></i>Information supplémentaires</h4>
                                         <br>
-                                        <form method="POST" action="recueil.php">
+                                        <form method="POST" action="recueil.php" onsubmit="return verifier(this);">
                                         
                                         <!-- ADRESSE -->
                                         <h5 class="card-title mt-3 text-center righteous"><i class="fas fa-biking fa-2x mr-1" aria-hidden="true"></i>ADRESSE</h5>
@@ -81,7 +81,7 @@ session_start();
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-id-card" aria-hidden="true"></i></span>
                                                 </div>
-                                                <input name="numero_habitations" class="form-control" placeholder="Numéro d'habitation *" pattern="[0-9]{0,4}" type="text">
+                                                <input required name="numero_habitations" class="form-control" placeholder="Numéro d'habitation *" pattern="[0-9]{0,4}" type="text">
                                             </div>
                                             <!-- extension_habitations  -->
                                             <div class="form-group input-group">
@@ -95,14 +95,14 @@ session_start();
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                                 </div>
-                                                <input name="rue_habitations" class="form-control" placeholder="Rue *" type="text">
+                                                <input required name="rue_habitations" class="form-control" placeholder="Rue *" type="text">
                                             </div> 
                                             <!-- code_postal_habitations -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-id-card" aria-hidden="true"></i></span>
                                                 </div>
-                                                <input name="code_postal_habitations" class="form-control" placeholder="Code Postal *" pattern="[0-9]{5}" type="text">
+                                                <input required name="code_postal_habitations" class="form-control" placeholder="Code Postal *" pattern="[0-9]{5}" type="text">
                                             </div>
 
                                             <!-- villes_habitations -->
@@ -110,7 +110,7 @@ session_start();
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-id-card-o" aria-hidden="true"></i> </span>
                                                 </div>
-                                                <input name="villes_habitations" class="form-control" placeholder="Ville *" type="text">
+                                                <input required name="villes_habitations" class="form-control" placeholder="Ville *" type="text">
                                             </div>
                                             
                                             <!-- type_utilisateur -->
@@ -118,7 +118,8 @@ session_start();
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fas fa-male" aria-hidden="true"></i> </span>
                                                 </div>
-                                                <select name="type_utilisateur" class="form-control">
+                                                <select required name="type_utilisateur" class="form-control">
+                                                    <option disabled selected>Particulier ou professionel ?</option>
                                                     <option value="part">Particulier</option>
                                                     <option value="pro">Professionel</option>    
                                                 </select>
@@ -132,21 +133,21 @@ session_start();
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                                 </div>
-                                                <input name="CB_number" class="form-control" placeholder="Numéro de CB *" type="text" pattern="[0-9]{0,16}"><!-- PATTERN A CHANGER APRES VERIFICATION  -->
+                                                <input required name="CB_number" class="form-control" placeholder="Numéro de CB *" type="text" pattern="[0-9]{0,16}"><!-- PATTERN A CHANGER APRES VERIFICATION  -->
                                             </div> 
                                             <!-- CB_name -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                                 </div>
-                                                <input name="CB_name" class="form-control" placeholder="Nom du titulaire de la carte *" type="text">
+                                                <input required name="CB_name" class="form-control" placeholder="Nom du titulaire de la carte *" type="text" pattern="[a-Z]{0,100}">
                                             </div>
                                             <!-- CB_validate -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                                 </div>
-                                                <input name="CB_validate" class="form-control" placeholder="Date de valitidé de la carte" type="date">
+                                                <input required name="CB_validate" class="form-control" placeholder="Date de valitidé de la carte" type="date">
                                             </div>
                                             <!-- SUBMIT -->
                                             <div class="form-group">
@@ -164,14 +165,14 @@ session_start();
 
 
 <!-- MODAL -->
-    <!-- SIGNUP -->
-                <div class="modal fade" id="modalSignUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+    <!-- MODAL SIGN IN -->
+    <div class="modal fade" id="modalSignIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog " role="document">
                         <div class="modal-content">
-                            
+                            <div class="modal-body">
                                 <div class="card bg-light">
                                     <article class="card-body mx-auto" style="max-width: 400px;">
-                                        <h4 class="card-title mt-3 text-center righteous"><i class="fas fa-biking fa-2x mr-1" aria-hidden="true"></i>Créer un compte</h4>
+                                        <h4 class="card-title mt-3 text-center righteous"><i class="fas fa-biking fa-2x mr-1" aria-hidden="true"></i>Se connecter</h4>
                                         <br>
                                         <p>
                                             <a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter mr-2"></i>Se connecter via Twitter</a>
@@ -181,34 +182,13 @@ session_start();
                                             <span class="bg-light">OU</span>
                                         </p>
                                         <form method="POST" action="admin/recueil.php">
-                                            <!-- NOM -->
-                                            <div class="form-group input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fa fa-id-card-o" aria-hidden="true"></i> </span>
-                                                </div>
-                                                <input name="nom_utilisateur" class="form-control" placeholder="Nom" type="text">
-                                            </div>
-                                            <!-- PRENOM -->
-                                            <div class="form-group input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fa fa-id-card" aria-hidden="true"></i></span>
-                                                </div>
-                                                <input name="prenom_utilisateur" class="form-control" placeholder="Prénom" type="text">
-                                            </div>
                                             <!-- E-MAIL -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                                 </div>
-                                                <input name="adresse_mail_utilisateur" class="form-control" placeholder="Adresse mail" type="email">
+                                                <input name="adresse_mail_utilisateur" class="form-control" placeholder="Adresse e-mail" type="email">
                                             </div> 
-                                            <!-- DATE DE NAISSANCE -->
-                                            <div class="form-group input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fas fa-birthday-cake"></i> </span>
-                                                </div>
-                                                <input name="date_naissance_utilisateur" class="form-control" placeholder="Date de naissance" value="Date de naissance" type="date">
-                                            </div>
                                             <!-- PASSWORD -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
@@ -216,27 +196,19 @@ session_start();
                                                 </div>
                                                 <input name="password_utilisateur" class="form-control" placeholder="Mot de passe" type="password">
                                             </div> 
-                                            <!-- REPETER PASSWORD -->
-                                            <div class="form-group input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                                                </div>
-                                                <input name="password_utilisateur2" class="form-control" placeholder="Répeter votre mot de passe" type="password">
-                                            </div>
                                             <!-- SUBMIT -->
                                             <div class="form-group">
-                                                <button name="submitAjoutUtilisateur" type="submit" class="btn btn-primary btn-block">Créer son compte</button>
-                                            </div>       
-                                            <p class="text-center">Déjà membre? <a href="" data-toggle="modal" data-target="#modalSignIn" data-dismiss="modal">Log In</a> </p>                                                                 
+                                                <button name="form_connexion" type="submit" class="btn btn-primary btn-block">Se connecter</button>
+                                            </div>                                                                 
                                         </form>
                                     </article>
-                                </div> <!-- card.// -->
+                                </div> 
                             
-                            
+                            </div>
                         </div>
                     </div>
                 </div>
-    <!-- // MODAL SIGN UP -->
+    <!-- // MODAL SIGN IN -->
     
 <!-- // MODAL -->
             </div>
@@ -251,6 +223,7 @@ session_start();
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src='../assets/js/main.js'></script>
 
 </body>
 </html>

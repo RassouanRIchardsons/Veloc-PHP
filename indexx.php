@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 require 'admin/recueil.php';
 $db = connect("dbVeloc");
 
@@ -62,23 +62,23 @@ if(isset($_POST['contactez_nous'])){
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#contenu_principal">Page d'accueil</a>
+                                    <a class="nav-link righteous" href="#contenu_principal">Page d'accueil</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#ville">Trouvez sa borne</a>
+                                    <a class="nav-link righteous" href="#ville">Trouvez sa borne</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#caracteristiques">Nos vélos</a>
+                                    <a class="nav-link righteous" href="#caracteristiques">Nos vélos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#footer">Contact et Info</a>
+                                    <a class="nav-link righteous" href="#footer">Contact et Info</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="col-12 col-lg-3 d-flex justify-content-end">
                             <?php if(isset($_SESSION['nom_utilisateur'])){
-                                echo "<p class ='pr-4'>Bonjour ".$_SESSION['nom_utilisateur']."</p>";
-                                echo "<a href='admin/logout.php' class='pr-4'>Se déconnecter </a>";
+                                echo "<p class='pt-3 pr-4'>Bonjour <b>".$_SESSION['nom_utilisateur']."</b></p>";
+                                echo "<a class='pt-3' href='admin/logout.php'><u>Déconnexion ?</u></a>";
                                 
                                 }else{
                                     echo "<a href='' class='' data-toggle='modal' data-target='#modalSignIn'>S'identifier </a>
@@ -136,14 +136,14 @@ if(isset($_POST['contactez_nous'])){
                         <br>
                         <h2 class="ovf text-center"><a href="#caracteristiques">Découvrez ici nos différents types de vélo</a></h2>
                         <hr class="hr_perso ">
-                        <h3 class="ovf text-center righteous my-4"><u>Libre service 24h/24 7j/7 !</u></h3>
+                        <h3 class="ovf text-center righteous my-4">Libre service 24h/24 7j/7 !</h3>
                         
         <!-- CARD 1 -->
                         <div class="row justify-content-center mt-4 pt-4">
                             <div class="col-sm-8 col-md-3 col-10 my-1 rounded">
                                 <div class="card shadow_perso card_gauche card_1 h-100">
                                     <div class="card-body text-center">
-                                        <h5 class="ovf card-title">Simple !</h5>
+                                        <h5 class="ovf card-title"><b>Simple !</b></h5>
                                         <p class="card-text">24h/24, 7j/7, vous pouvez voyagez à vélo d'une station à une autre parmi les x stations implantées dans nous 4 villes.</p>
                                     </div>
                                 </div>
@@ -151,7 +151,7 @@ if(isset($_POST['contactez_nous'])){
                             <div class="col-sm-8 col-md-3 col-10 my-1 rounded">
                                 <div class="card shadow_perso card_1 h-100">
                                     <div class="card-body text-center">
-                                        <h5 class="ovf card-title">Pas cher</h5>
+                                        <h5 class="ovf card-title"><b>Pas cher</b></h5>
                                         <p class="card-text">Des coûts d'accès au service à partir de 1,10€ par heure, 5,30€ par jour et 32,50€ (hors coût d'utilistation).</p>
                                     </div>
                                 </div>
@@ -159,7 +159,7 @@ if(isset($_POST['contactez_nous'])){
                             <div class="col-sm-8 col-md-3 col-10 my-1 rounded">
                                 <div class="card shadow_perso card_droite card_1 h-100">
                                     <div class="card-body text-center">
-                                        <h5 class="ovf card-title">Rapide</h5>
+                                        <h5 class="ovf card-title"><b>Rapide</b></h5>
                                         <p class="card-text">2 minutes suffisent pour s'abonner depuis une borne (abonnement 24h ou 7jours) et retirer un vélo.</p>
                                     </div>
                                 </div>
@@ -321,40 +321,40 @@ if(isset($_POST['contactez_nous'])){
                                 <table class="col-9 table table-striped border shadow_perso">
                                     <thead>
                                         <tr>
-                                            <th scope="col"><u>Type de Véloc</u></th>
-                                            <th class="text-center" scope="col"><u>Mécanique</u></th>
-                                            <th class="text-center" scope="col"><u>Électrique</u></th>
+                                            <th class="righteous thead_tableau" scope="col">Type de Véloc</th>
+                                            <th class="text-center righteous thead_tableau" scope="col">Mécanique</th>
+                                            <th class="text-center righteous thead_tableau" scope="col">Électrique</th>
                                             
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th scope="row"><u>Matériaux</u></th>
+                                            <th scope="row" class="righteous th_tableau">Matériaux</th>
                                             <td class="text-center">Aluminium</td>
                                             <td class="text-center">Aluminium</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row"><u>Nombre de vitesse</u></th>
+                                            <th scope="row" class="righteous th_tableau">Nombre de vitesse</th>
                                             <td class="text-center">Manette Shimuno 7 vitesses</td>
                                             <td class="text-center">Manette Shimuno 8 vitesses</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row"><u>Poids</u></th>
+                                            <th scope="row" class="righteous th_tableau">Poids</th>
                                             <td class="text-center">11kg</td>
                                             <td class="text-center">25kg</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row"><u>Taille</u></th>
+                                            <th scope="row" class="righteous th_tableau">Taille</th>
                                             <td class="text-center">28 pouces</td>
                                             <td class="text-center">28 pouces</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row"><u>Batterie</u></th>
+                                            <th scope="row" class="righteous th_tableau">Batterie</th>
                                             <td class="text-center">X</td>
                                             <td class="text-center">Lithium-ION 36V8AHFST</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row"><u>Autonomie</u></th>
+                                            <th scope="row" class="righteous th_tableau">Autonomie</th>
                                             <td class="text-center">X</td>
                                             <td class="text-center">40km selon l'utilisation</td>
                                         </tr>
@@ -468,13 +468,14 @@ if(isset($_POST['contactez_nous'])){
                                         <p class="divider-text">
                                             <span class="bg-light">OU</span>
                                         </p>
-                                        <form method="POST" action="admin/recueil.php">
+                                        <form method="POST" action="admin/recueil.php" onsubmit="return verifier(this);">
                                             <!-- SEXE -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fas fa-male" aria-hidden="true"></i> </span>
                                                 </div>
-                                                <select name="sexe_utilisateur" class="form-control">
+                                                <select required id="sexe_utilisateur" name="sexe_utilisateur" class="form-control">
+                                                    <option selected disabled>Sexe</option>
                                                     <option value="m">Homme</option>
                                                     <option value="f">Femme</option>    
                                                 </select>
@@ -484,47 +485,47 @@ if(isset($_POST['contactez_nous'])){
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-id-card-o" aria-hidden="true"></i> </span>
                                                 </div>
-                                                <input name="nom_utilisateur" class="form-control" placeholder="Nom" type="text">
+                                                <input required name="nom_utilisateur" class="form-control" placeholder="Nom" type="text">
                                             </div>
                                             <!-- PRENOM -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-id-card" aria-hidden="true"></i></span>
                                                 </div>
-                                                <input name="prenom_utilisateur" class="form-control" placeholder="Prénom" type="text">
+                                                <input required name="prenom_utilisateur" class="form-control" placeholder="Prénom" type="text">
                                             </div>
                                             <!-- E-MAIL -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                                 </div>
-                                                <input name="adresse_mail_utilisateur" class="form-control" placeholder="Adresse mail" type="email">
+                                                <input required name="adresse_mail_utilisateur" class="form-control" placeholder="Adresse mail" type="email">
                                             </div> 
                                             <!-- DATE DE NAISSANCE -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fas fa-birthday-cake"></i> </span>
                                                 </div>
-                                                <input name="date_naissance_utilisateur" class="form-control" placeholder="Date de naissance" value="Date de naissance" type="date">
+                                                <input required name="date_naissance_utilisateur" class="form-control" placeholder="Date de naissance" value="Date de naissance" type="date">
                                             </div>
                                             <!-- PASSWORD -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                                 </div>
-                                                <input name="password_utilisateur" class="form-control" placeholder="Mot de passe" type="password">
+                                                <input required name="password_utilisateur" class="form-control" placeholder="Mot de passe" type="password">
                                             </div> 
                                             <!-- REPETER PASSWORD -->
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                                 </div>
-                                                <input name="password_utilisateur2" class="form-control" placeholder="Répeter votre mot de passe" type="password">
+                                                <input required name="password_utilisateur2" class="form-control" placeholder="Répeter votre mot de passe" type="password">
                                             </div>
                                             <!-- SUBMIT -->
                                             <div class="form-group">
                                                 <button name="submitAjoutUtilisateur" type="submit" class="btn btn-primary btn-block">Créer son compte</button>
-                                            </div>       
+                                            </div>     
                                             <p class="text-center">Déjà membre? <a href="" data-toggle="modal" data-target="#modalSignIn" data-dismiss="modal">Log In</a> </p>                                                                 
                                         </form>
                                     </article>
@@ -557,7 +558,7 @@ if(isset($_POST['contactez_nous'])){
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                                                 </div>
-                                                <input name="adresse_mail_utilisateur" class="form-control" placeholder="Adresse mail" type="email">
+                                                <input name="adresse_mail_utilisateur" class="form-control" placeholder="Adresse e-mail" type="email">
                                             </div> 
                                             <!-- PASSWORD -->
                                             <div class="form-group input-group">

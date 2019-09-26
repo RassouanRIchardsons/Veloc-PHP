@@ -4,7 +4,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 #contenu_principal{
-    overflow-x: -moz-hidden-unscrollable;
+
     min-height: 530px;
     background-color: #e9f8ff;
 }
@@ -37,6 +37,15 @@ section{
 }
 
 /*POLICE*/
+input:invalid {
+    border: 0.5px solid #f2b8b8 !important;
+}
+.thead_tableau{
+    font-size: xx-large;
+}
+.th_tableau{
+    font-size: large;
+}
 .righteous{
     font-family: 'Righteous', cursive!important;
 }

@@ -141,3 +141,12 @@ function getVilleParis (){
     textborne4.textContent = "10 bis Avenue Trudaine, 09 Paris"; 
 } 
 
+function verifier(f) {
+    if( /* le formulaire est bien rempli */ )
+        return true;
+    else
+    {
+        alert('Le formulaire est mal rempli');
+        return false;
+}
+}
